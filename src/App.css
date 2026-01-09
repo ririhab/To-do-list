@@ -1,38 +1,164 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*wooden desk background*/
+  background: 
+    linear-gradient(135deg, #8b6f47 0%, #6b5638 50%, #8b6f47 100%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+  background-size: 100% 100%, 20px 20px;
   min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/*paper texture overlay*/
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.App {
+  max-width: 900px;
+  margin: 0 auto;
+  /*memo pad paper color (cream/yellow)*/
+  background: linear-gradient(
+    to bottom,
+    #fffef7 0%,
+    #fff9e6 50%,
+    #fffef7 100%
+  );
+  /*paper texture*/
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      rgba(0, 0, 0, 0.03) 31px,
+      rgba(0, 0, 0, 0.03) 32px
+    ),
+    linear-gradient(
+      to bottom,
+      #fffef7 0%,
+      #fff9e6 50%,
+      #fffef7 100%
+    );
+  border-radius: 0;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 8px rgba(139, 111, 71, 0.1);
+  overflow: hidden;
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
+  transform: rotate(-0.5deg);
+  transition: transform 0.3s ease;
+  z-index: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.App:hover {
+  transform: rotate(0deg);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/*red margin line*/
+.App::after {
+  content: '';
+  position: absolute;
+  left: 50px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 0, 0, 0.2);
+  z-index: 1;
+  pointer-events: none;
+}
+.app-header {
+  background: transparent;
+  color: #333;
+  padding: 50px 30px 30px 80px;
+  text-align: left;
+  position: relative;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: 'Courier New', monospace;
+}
+.app-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 400;
+  font-style: italic;
+}
+.app-main {
+  flex: 1;
+  padding: 30px 30px 30px 80px;
+  overflow-y: auto;
+  position: relative;
+}
+.app-footer {
+  background: transparent;
+  padding: 15px 30px 15px 80px;
+  text-align: left;
+  color: #888;
+  font-size: 0.85rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-style: italic;
+}
+/*responsive design*/
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
   }
-  to {
-    transform: rotate(360deg);
+  .App {
+    transform: rotate(0deg);
+    min-height: calc(100vh - 40px);
+  }
+  .App::before {
+    width: 30px;
+    height: 40px;
+  }
+  .App::after {
+    left: 30px;
+  }
+  .app-header {
+    padding: 40px 20px 20px 50px;
+  }
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  .app-main {
+    padding: 20px 20px 20px 50px;
+  }
+  .app-footer {
+    padding: 15px 20px 15px 50px;
   }
 }
